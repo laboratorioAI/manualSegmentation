@@ -1,0 +1,12 @@
+# List of untracked files to ignore
+.gitattributes
+
+# Windows default autosave extension
+*.asv
+
+resources/
+
+*.prj
+.git/
+
+temp/
