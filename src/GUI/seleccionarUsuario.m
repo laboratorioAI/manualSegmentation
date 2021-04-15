@@ -22,7 +22,7 @@ function varargout = seleccionarUsuario(varargin)
 
 % Edit the above text to modify the response to help seleccionarUsuario
 
-% Last Modified by GUIDE v2.5 20-Aug-2019 09:34:33
+% Last Modified by GUIDE v2.5 14-Apr-2021 13:01:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -69,9 +69,9 @@ if flagCompleteness ~= 1
     str{1} = 'ERROR';
     str{2} = '';
     if flagCompleteness == -1
-        str{3} = 'El siguiente usuario no tiene todos los gestos grabados:';
+        str{3} = 'Following user has incomplete data:';
     else
-        str{3} = 'Los siguientes usuarios no tienen todas las muestras grabadas:';
+        str{3} = 'Following users have incomplete data:';
     end
     str{4} = '';
     numUsersWithErrors = length(usersWithIncompleteness);
@@ -81,35 +81,21 @@ if flagCompleteness ~= 1
         str{count} = upper(usersWithIncompleteness{i}.name);
     end
     str{count + 1} = '';
-    str{count + 2} = 'Por favor, envÌe un email siguiendo las siguientes instrucciones:';
-    str{count + 3} = '';
-    str{count + 4} = 'Asunto: Software de SegmentaciÛn - Datos Incompletos';
-    str{count + 5} = '';
-    str{count + 6} = 'Direcciones de email:';
-    str{count + 7} = 'marco.benalcazar@epn.edu.ec';
-    str{count + 8} = 'lorena.barona@epn.edu.ec';
-    str{count + 9} = 'angel.valdivieso@epn.edu.ec';
-    str{count + 10} = '';
-    str{count + 11} = ['En el contenido del email agregar una captura de pantalla ',...
-        'de este mensaje junto con los siguientes datos de quien reporta el error:'];
-    str{count + 12} = '';
-    str{count + 13} = 'Nombre y Apellido';
-    str{count + 14} = 'Celular';
-    str{count + 15} = 'InstituciÛn';
-    uiwait(errordlg(str, 'ERROR EN LOS DATOS'));
+
+    uiwait(errordlg(str, 'ERROR IN DATA'));
     delete(gcf);
     return;
 end
 
-% Verifica si todas las carpetas tienen la fotografÌa requerida
+% Verifica si todas las carpetas tienen la fotograf√≠a requerida
 [flagCompleteness, usersWithIncompleteness] = checkCompletenessOfPictures();
 if flagCompleteness ~= 1
     str{1} = 'ERROR';
     str{2} = '';
     if length(usersWithIncompleteness) == 1
-        str{3} = 'El siguiente usuario no tiene la fotografÌa del brazalete colocado en el antebrazo:';
+        str{3} = 'The following user does not have photography:';
     else
-        str{3} = 'Los siguientes usuarios no tienen la fotografÌa del brazalete colocado en el antebrazo:';
+        str{3} = 'The following users do not have photography:';
     end
     str{4} = '';
     numUsersWithErrors = length(usersWithIncompleteness);
@@ -119,22 +105,9 @@ if flagCompleteness ~= 1
         str{count} = upper(usersWithIncompleteness{i}.name);
     end
     str{count + 1} = '';
-    str{count + 2} = 'Por favor, envÌe un email siguiendo las siguientes instrucciones:';
-    str{count + 3} = '';
-    str{count + 4} = 'Asunto: Software de SegmentaciÛn - Datos sin FotografÌa';
-    str{count + 5} = '';
-    str{count + 6} = 'Direcciones de email:';
-    str{count + 7} = 'marco.benalcazar@epn.edu.ec';
-    str{count + 8} = 'lorena.barona@epn.edu.ec';
-    str{count + 9} = 'angel.valdivieso@epn.edu.ec';
-    str{count + 10} = '';
-    str{count + 11} = ['En el contenido del email agregar una captura de pantalla ',...
-        'de este mensaje junto con los siguientes datos de quien reporta el error:'];
-    str{count + 12} = '';
-    str{count + 13} = 'Nombre y Apellido';
-    str{count + 14} = 'Celular';
-    str{count + 15} = 'InstituciÛn';
-    uiwait(errordlg(str, 'ERROR EN LOS DATOS'));
+    str{count + 2} = 'Please, contact lab members about this issue.';
+    
+    uiwait(errordlg(str, 'ERROR IN DATA'));
     delete(gcf);
     return;
 end
@@ -145,7 +118,7 @@ str{1} = encabezado;
 for i = 2:(num + 1)
     str{i} = usuarios(i - 1).name;
 end
-str{num + 2} = 'MI NOMBRE NO EST¡ EN ESTA LISTA';
+% str{num + 2} = 'MI NOMBRE NO EST√Å EN ESTA LISTA';
 set(handles.listaDeUsuariosPopMenu, 'String', str);
 
 
@@ -192,65 +165,45 @@ function aceptarPushbutton_Callback(hObject, eventdata, handles)
 global usuarios;
 valor = get(handles.listaDeUsuariosPopMenu, 'Value');
 if valor == 1 % No se selecciona un nombre
-    str = {'Debe seleccionar su nombre de la lista'};
-    uiwait(msgbox(str, 'ADVERTENCIA', 'warning'));
+    str = {'Select your name in the list'};
+    uiwait(msgbox(str, 'WARNING', 'warning'));
 else
-    popMenuList = get(handles.listaDeUsuariosPopMenu, 'String');
-    if strcmpi( popMenuList{valor}, 'MI NOMBRE NO EST¡ EN ESTA LISTA')
-        str{1} = 'INSTRUCCIONES';
-        str{2} = '';
-        str{3} = 'Para poder usar este programa debe estar autorizado.';
-        str{4} = 'Por favor, envÌe un email siguiendo las siguientes instrucciones:';
-        str{5} = '';
-        str{6} = 'Asunto: Software de SegmentaciÛn - Nuevo Usuario';
-        str{7} = '';
-        str{8} = 'Direcciones de email:';
-        str{9} = 'marco.benalcazar@epn.edu.ec';
-        str{10} = 'lorena.barona@epn.edu.ec';
-        str{11} = 'angel.valdivieso@epn.edu.ec';
-        str{12} = '';
-        str{13} = 'En el contenido del email agregar los siguientes datos:';
-        str{14} = '';
-        str{15} = 'Nombre y Apellido';
-        str{16} = 'Celular';
-        str{17} = 'InstituciÛn';
-        uiwait(msgbox(str, 'CONTACTO','help'));
+%     popMenuList = get(handles.listaDeUsuariosPopMenu, 'String');
+    
+    nameOfSegmentator = usuarios(valor - 1);
+    qstring{1} = 'You selected:';
+    qstring{2} = '';
+    qstring{3} = upper(usuarios(valor - 1).name);
+    qstring{4} = '';
+    qstring{5} = 'Is it correct?';
+    choice = questdlg(qstring,'Info of the segmentator',...
+        'YES','NO','YES');
+    if strcmpi(choice,'YES')
         delete(gcf);
-    else
-        nameOfSegmentator = usuarios(valor - 1);
-        qstring{1} = 'Usted ha selecionado:';
-        qstring{2} = '';
-        qstring{3} = upper(usuarios(valor - 1).name);
-        qstring{4} = '';
-        qstring{5} = 'øEs correcto?';
-        choice = questdlg(qstring,'SEGMENTADOR DE DATOS',...
-            'SI','NO','NO');
-        if strcmpi(choice,'SI')
-            delete(gcf);
-            qstr = [upper(usuarios(valor - 1).name), ...
-                ' øEs la primera vez que usa este programa?'];
-            choice = questdlg(qstr,'SEGMENTADOR DE DATOS',...
-                'SI','NO','NO');
-            if strcmpi(choice,'SI')
-                qqstr{1} = 'Vamos a resetear todos los contadores del programa';
-                qqstr{2} = '';
-                qqstr{3} = 'Si resetea los contadores PERDER¡ TODAS LAS SEGMENTACIONES REALIZADAS';
-                qqstr{4} = '';
-                qqstr{5} = 'øDesea continuar?';
-                answer = questdlg(qqstr, ...
-                    'PREGUNTA', ...
-                    'SI','NO','NO');
-                if strcmpi(answer,'SI')
-                    resetContadores();
-                else
-                    delete(gcf);
-                    return;
-                end
+        qstr = [upper(usuarios(valor - 1).name), ...
+            '. Is this the first time you use this program?'];
+        choice = questdlg(qstr,'Info of the segmentator',...
+        'YES','NO','YES');
+        if strcmpi(choice,'YES')
+            qqstr{1} = 'Reseting counters';
+            qqstr{2} = '';
+            qqstr{3} = 'If you do this, YOU WILL LOSE ALL THE SEGMENTATIONS';
+            qqstr{4} = '';
+            qqstr{5} = 'Do you want to continue?';
+            answer = questdlg(qqstr, ...
+                'Quesion', ...
+                'YES','NO','NO');
+            if strcmpi(answer,'YES')
+                resetContadores();
+            else
+                delete(gcf);
+                return;
             end
-            manualSegmentation();
-            save('.\matFiles\nameOfSegmentator.mat', 'nameOfSegmentator');
         end
+        manualSegmentation();
+        save('.\matFiles\nameOfSegmentator.mat', 'nameOfSegmentator');
     end
+    
 end
 
 % --- Executes when user attempts to close figure1.

@@ -8,6 +8,10 @@ flagUser = false(1, numFolders - 2);
 countUsers = 0;
 usersWithIncompleteness = {};
 for i = 3:numFolders
+    if ~folders(i).isdir
+        flagUser(i - 2) = true;
+        continue
+    end
     count = 0;
     flagUser(i - 2) = false;
     while count < numPicFormats

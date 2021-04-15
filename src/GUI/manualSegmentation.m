@@ -80,14 +80,14 @@ end
 segmentTam = xo - xi;
 if segmentTam <= lowerBoundSamples || segmentTam >= upperBoundSamples
     if segmentTam <= lowerBoundSamples
-        str = ['La longitud del segmento es ',...
+        str = ['Segment length is ',...
             num2str(segmentTam) ' (' num2str(segmentTam/params.emgFreq) ' s) ',...
-            'y es menor que ' num2str(lowerBoundSamples),...
+            'an is lower than ' num2str(lowerBoundSamples),...
             ' (' num2str(lowerBoundSamples/params.emgFreq) ' s) '];
     else
-        str = ['La longitud del segmento es ',...
+        str = ['Segment length is ',...
             num2str(segmentTam) ' (' num2str(segmentTam/params.emgFreq) ' s) ',...
-            'y es mayor que ' num2str(upperBoundSamples),...
+            'and is larger than ' num2str(upperBoundSamples),...
             ' (' num2str(upperBoundSamples/params.emgFreq) ' s) '];
     end
     errordlg(str,'ERROR', 'modal');
@@ -112,7 +112,7 @@ function volverButton_Callback(~, ~, handles)
 global kUser kGesture kRep xi xo
 
 if kUser == 1 && kGesture == 1 && kRep == 1
-    msgbox('Acción imposible de ejecutar');
+    msgbox('Not possible');
     
 else
     [kUser, kGesture, kRep] = bajarIndices(kUser, kGesture, kRep);
@@ -218,7 +218,7 @@ function acercaDe_Callback(hObject, eventdata, handles)
 % hObject    handle to acercaDe (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-str = {'Segmentación manual de Señales Electromiográficas (EMG) del Brazo Humano'
+str = {'Manual segmentation of EMG signals for Hand Gesture Recognition'
     ''
     'Versión 3 reactualizada por Jonathan Zea'
     'Proyecto Reconocimiento de Gestos'
@@ -227,50 +227,50 @@ str = {'Segmentación manual de Señales Electromiográficas (EMG) del Brazo Hum
     'Revisión 2: 20 de agosto de 2019'
     'Revisión 3: 31 de agosto de 2019'
     'Revisión 4: 17 de febrero de 2021'
+    'Revision 5: April 142021 (translation)'
     ''
     'Versión 1 creada por el Ing. Jonathan Zea'
     'Agosto de 2018'};
-msgbox(str,'ACERCA DE...','help');
+msgbox(str,'ABOUT...','help');
 
 % --------------------------------------------------------------------
 function contactInformation_Callback(hObject, eventdata, handles)
 % hObject    handle to contactInformation (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-str{1} = 'INFORMACIÓN PARA CONTACTO';
-str{2} = '';
-str{3} = 'En el que caso que detecte algún error en este programa,';
-str{4} = 'por favor repórtelo vía email con los siguientes datos:';
-str{5} = '';
-str{6} = 'Asunto: Software de Segmentación';
-str{7} = '';
-str{8} = 'Direcciones de email:';
-str{9} = 'marco.benalcazar@epn.edu.ec';
-str{10} = 'lorena.barona@epn.edu.ec';
-str{11} = 'angel.valdivieso@epn.edu.ec';
-str{12} = '';
-str{13} = 'Por favor, no olvide identificarse e indicar su institución.';
-str{14} = '';
-str{15} = 'Finalmente, recomendamos enviar una captura de pantalla que';
-str{16} = 'permita visualizar el error o problema en cuestión.';
-msgbox(str, 'CONTACTO','help');
+str = {'CONTACT INFORMATION'
+    ''
+    'In case you detect an error in this software'
+    'please report it by email to:'
+    ''
+    'Subject: HGR - Manual Segmentation Software'
+    ''
+    'Email address:'
+    'marco.benalcazar@epn.edu.ec'
+    'lorena.barona@epn.edu.ec'
+    'angel.valdivieso@epn.edu.ec'
+    ''
+    'With the screenshot of the error.'
+    'Thank you.'};
+
+msgbox(str, 'CONTACT','help');
 
 
 % --------------------------------------------------------------------
 function printFinalMessage()
-str{1} = 'Gracias, ha terminado con la segmentación';
-str{2} = '';
-str{3} = 'Por favor, realice los siguientes pasos:';
-str{4} = '1. Comprima con Zip o Winrar la carpeta "matFiles"';
-str{5} = '2. Envíe por email el archivo generado en el paso anterior con los siguientes datos:';
-str{6} = 'Asunto: Resultado de la Segmentación';
-str{7} = 'Direcciones de email:';
-str{8} = 'marco.benalcazar@epn.edu.ec';
-str{9} = 'lorena.barona@epn.edu.ec';
-str{10} = 'angel.valdivieso@epn.edu.ec';
-str{11} = '';
-str{12} = 'Por favor, no olvide identificarse e indicar su institución.';
-uiwait(msgbox(str,'MENSAJE','help'));
+str = {'Thank you, you finished the segmentation'
+    ''
+    'Please:'
+    '1. Compress the folder "matFiles"'
+    '2. Email the file to:'
+    'Subject: Segmented the segmentation'
+    'email addresses:'
+    'marco.benalcazar@epn.edu.ec'
+    'lorena.barona@epn.edu.ec'
+    'angel.valdivieso@epn.edu.ec'
+    ''
+    };
+uiwait(msgbox(str,'MESSAGE','help'));
 
 % --- Executes during object creation, after setting all properties.
 function mainAxes_CreateFcn(hObject, eventdata, handles)

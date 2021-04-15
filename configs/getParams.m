@@ -29,9 +29,9 @@ Matlab 9.9.0.1538559 (R2020b) Update 3.
 %% gestures 
 parameters.numGestures = 12; % including sync
 
-numReps = 3;
+numReps = 2;% min number of reps
 % numOfRepetitionsRelax = 3;
-numOfRepetitionsSync = 5;
+numOfRepetitionsSync = 1;
 
 parameters.gestures = {'waveIn', 'waveOut', 'fist', 'open', 'pinch',...
     'up', 'down', 'forward', 'backward', 'left', 'right', 'sync'};

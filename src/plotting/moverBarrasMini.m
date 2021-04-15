@@ -8,7 +8,7 @@ if isequal(xString,'xo') % el orden de los children se definió en initPlots
 elseif isequal(xString,'xi')
     kChildren = 2;
 else
-    disp('Error en moverBarrasMini')
+    disp('Error in moverBarrasMini')
 end
 
 %

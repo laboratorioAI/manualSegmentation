@@ -16,6 +16,10 @@ usersWithIncompleteness = {};
 count = 0;
 
 for i = 3:numFolders
+    if ~folders(i).isdir
+        continue
+    end
+    
     info = load(['data\' folders(i).name '\userData.mat']) ;
     userData = info.userData;
     try
@@ -39,15 +43,15 @@ for i = 3:numFolders
             count = count + 1;
             
             % User with incomplete data
-            usersWithIncompleteness{count} = folders(i); 
+            usersWithIncompleteness{count} = folders(i);
         end
     catch
         count = count + 1;
         
         % Indicates that the number of samples is incomplete
-        flagCompleteness = -1; 
+        flagCompleteness = -1;
         % User with incomplete data
-        usersWithIncompleteness{count} = folders(i); 
+        usersWithIncompleteness{count} = folders(i);
         return;
     end
     

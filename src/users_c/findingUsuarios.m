@@ -4,9 +4,14 @@ usuariosList = dir('.\data');
 usuariosNum = size(usuariosList,1);
 
 %%
-vectorUser = cell(usuariosNum - 2,1);
+vectorUser = {};
+iU = 0;
 for kUser = 3:usuariosNum
-  vectorUser{kUser - 2} = usuariosList(kUser).name;
+    if ~usuariosList(kUser).isdir
+        continue
+    end
+    iU = iU + 1;
+  vectorUser{iU} = usuariosList(kUser).name;
 end
 
 end
