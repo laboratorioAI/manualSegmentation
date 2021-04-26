@@ -72,8 +72,8 @@ parameters.yLims = [0 256]; % of raw emgs
 parameters.lowerBoundSamples = round(75  /200*500);
 parameters.upperBoundSamples = round(600  /200*500);
 
-parameters.lowerBoundSamplesSync = round(600  /200*500);
-parameters.upperBoundSamplesSync = round(1500  /200*500);
+parameters.lowerBoundSamplesSync = round(4*500);
+parameters.upperBoundSamplesSync = round(8.5*500); % 5-8 segs
 
 
 parameters.limsEmgFiltered = [0 200];
