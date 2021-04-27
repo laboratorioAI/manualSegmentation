@@ -22,10 +22,10 @@ close all;
 clc;
 
 addpath(genpath(pwd));
-global numUsersToSegment;
 
 folders = dir('data');
-numUsersToSegment = length(folders) - 2;
+global numUsersToSegment;
+numUsersToSegment = length(folders) - 3; % el current dir, el up dir, el readme
 
 seleccionarUsuario();
 
