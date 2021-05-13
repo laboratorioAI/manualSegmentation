@@ -64,31 +64,31 @@ varargout{1} = handles.output;
 function goButton_Callback(~, ~, handles)
 %%
 params = getParams();
-
+global DeviceType
+emgFreq = params.emgFreq.(DeviceType);
 global kUser kGesture kRep flags xi xo
 nameGesture = k2gesture(kGesture);
 
 if isequal(nameGesture, 'sync')
-    lowerBoundSamples = params.lowerBoundSamplesSync;
-    upperBoundSamples = params.upperBoundSamplesSync;
-    
+    lowerBoundSamples = params.lowerBoundSync*emgFreq;
+    upperBoundSamples = params.upperBoundSync*emgFreq;
 else
-    lowerBoundSamples = params.lowerBoundSamples;
-    upperBoundSamples = params.upperBoundSamples;
+    lowerBoundSamples = params.lowerBound*emgFreq;
+    upperBoundSamples = params.upperBound*emgFreq;
 end
 
 segmentTam = xo - xi;
 if segmentTam <= lowerBoundSamples || segmentTam >= upperBoundSamples
     if segmentTam <= lowerBoundSamples
         str = ['Segment length is ',...
-            num2str(segmentTam) ' (' num2str(segmentTam/params.emgFreq) ' s) ',...
-            'an is lower than ' num2str(lowerBoundSamples),...
-            ' (' num2str(lowerBoundSamples/params.emgFreq) ' s) '];
+            num2str(segmentTam) ' (' num2str(segmentTam/emgFreq) ' s) ',...
+            'must be greater than ' num2str(lowerBoundSamples),...
+            ' (' num2str(lowerBoundSamples/emgFreq) ' s) '];
     else
         str = ['Segment length is ',...
-            num2str(segmentTam) ' (' num2str(segmentTam/params.emgFreq) ' s) ',...
-            'and is larger than ' num2str(upperBoundSamples),...
-            ' (' num2str(upperBoundSamples/params.emgFreq) ' s) '];
+            num2str(segmentTam) ' (' num2str(segmentTam/emgFreq) ' s) ',...
+            'must be fewer than ' num2str(upperBoundSamples),...
+            ' (' num2str(upperBoundSamples/emgFreq) ' s) '];
     end
     errordlg(str,'ERROR', 'modal');
 else
@@ -126,6 +126,7 @@ function figure1_WindowButtonMotionFcn(~, ~, handles)
 %% movimiento del mouse
 global moverBarraInicio moverBarraFin levantado
 global xi xo kXLength
+global DeviceType
 
 if isequal(get(gca, 'Tag'),'mainAxes')
     eje = gca;
@@ -146,6 +147,7 @@ if isequal(get(gca, 'Tag'),'mainAxes')
     
     %
     params = getParams();
+    emgFreq = params.emgFreq.(DeviceType);
     if levantado
         if moverBarraInicio
             if x < xo
@@ -159,7 +161,7 @@ if isequal(get(gca, 'Tag'),'mainAxes')
                 
                 % segment length
                 handles.textSegmentLength.String = ...
-                    [num2str(xo - xi) ' (' num2str((xo - xi)/params.emgFreq) ' s)'];
+                    [num2str(xo - xi) ' (' num2str((xo - xi)/emgFreq) ' s)'];
             end
         end
         if moverBarraFin
@@ -174,7 +176,7 @@ if isequal(get(gca, 'Tag'),'mainAxes')
                 
                 % segment length
                 handles.textSegmentLength.String = ...
-                    [num2str(xo - xi) ' (' num2str((xo - xi)/params.emgFreq) ' s)'];
+                    [num2str(xo - xi) ' (' num2str((xo - xi)/emgFreq) ' s)'];
             end
         end
     end

@@ -21,10 +21,15 @@ clearvars;
 close all;
 clc;
 
-addpath(genpath(pwd));
+global numUsersToSegment;
+%% libs
+addpath(genpath('configs'));
+addpath(genpath('src'));
+addpath(genpath('images'));
+addpath(genpath('matFiles'));
 
 folders = dir('data');
-global numUsersToSegment;
+
 numUsersToSegment = length(folders) - 3; % el current dir, el up dir, el readme
 
 seleccionarUsuario();

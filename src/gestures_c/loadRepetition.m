@@ -1,11 +1,14 @@
-function [emgRep, idxStart, emgLength, mav, quats] = loadRepetition(nameUser, nameGesture, kRep)
-
+function [emgRep, idxStart, emgLength, mav, quats] = ...
+    loadRepetition(nameUser, nameGesture, kRep)
+% in this file the deviceType is set
+global DeviceType % must be myo or gForce
 %%
 folderAddress = '.\data\';
 
 filepath = [folderAddress nameUser '\userData.mat'];
 loadedData = load(filepath);
 
+DeviceType = loadedData.userData.deviceInfo.DeviceType;
 
 %% Loading the data for the class rest
 numRelaxSamples = length(loadedData.userData.gestures.relax.data);

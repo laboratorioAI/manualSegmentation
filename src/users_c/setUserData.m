@@ -1,6 +1,5 @@
 function [xi, xo] = setUserData(handles, kUser, kGesture, kRep)
 
-% set(handles.xPosText, 'String', '');
 %% datos
 [nameUser, totalUsers] = k2name(kUser);
 [nameGesture, totalGestures] = k2gesture(kGesture);
@@ -48,7 +47,9 @@ end
 
 
 %% guías!
+global DeviceType
 options = getParams();
+emgFreq = options.emgFreq.(DeviceType);
 try
     dat = load('indicesTodos.mat');
     indices = dat.indices;
@@ -56,24 +57,34 @@ try
     xo = indices.(nameUser).(nameGesture)(kRep,2);
 catch
     xi = idxStart;
-    if emgLength < options.emgFreq *options.recordingTime
-        xo = min(xi + options.gestureDuration, emgLength);
-    else
-        xo = emgLength - 5;
-    end
+    xo = min(xi + round(options.gestureDuration*emgFreq), ...
+        emgLength);
 end
+
 % saturating xi xo
-if xi <= 1
-    xi = 5;
+if xi <= options.border
+    xi = options.border + 1;
 end
 
-if xo >= emgLength
-    xo = emgLength - 5;
+if xo - xi <= options.minSliderSeparation
+    xo = xi + options.minSliderSeparation;
 end
 
-if xi >= xo
-    xi = xo - 20;
+if xo >= emgLength - options.border
+    xo = emgLength - options.border - 1;
 end
+
+if xo - xi <= options.minSliderSeparation
+    xi = xo - options.minSliderSeparation;
+end
+
+assert(xo > xi)
+%- txts
+handles.inicioText.String = num2str(xi);
+handles.finText.String = num2str(xo);
+
+handles.textSegmentLength.String = ...
+    [num2str(xo - xi) ' (' num2str((xo - xi)/emgFreq) ' s)'];
 
 handles.mainAxes.Children(1).XData = [xo xo];
 handles.mainAxes.Children(2).XData = [xi xi];

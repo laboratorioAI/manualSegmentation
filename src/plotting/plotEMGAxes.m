@@ -1,5 +1,5 @@
 function [idxStart, emgLength] = plotEMGAxes(handles, nameUser, numUser, totalUsers, nameGesture, numGesture, totalGestures, kRep)
-% dibuja las señales emg y qwuats según los datos de un usuario y una
+% dibuja las señales emg y quats según los datos de un usuario y una
 % repetición.
 % para eso inicia cargando las señales del usuario
 
@@ -33,7 +33,7 @@ for cidx = 1:8
     cmd = ['ax = handles.axes' idxSTR ';'];
     eval(cmd);
     
-    plot( ax, emgRep(:,cidx), 'LineWidth', 1); % no update
+    plot(ax, emgRep(:,cidx), 'LineWidth', 1); % no update
     
     xlim(ax, [0 xlimit]);
     ylim(ax, parameters.yLims);

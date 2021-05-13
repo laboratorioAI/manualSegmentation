@@ -4,7 +4,7 @@ function parameters = getParams()
 %
 % Outputs
 %   configs     -struct with fields
-% 
+%
 % Ejemplo
 %    = getConfig()
 %
@@ -26,12 +26,16 @@ Ahora solo lo sabe dios.
 Matlab 9.9.0.1538559 (R2020b) Update 3.
 %}
 
-%% gestures 
-parameters.numGestures = 12; % including sync
+%% recording times
+parameters.recordingTime = 5; % segs
+parameters.recordingTimeSync = 10; % segs
 
-numReps = 2;% min number of reps
-% numOfRepetitionsRelax = 3;
-numOfRepetitionsSync = 1;
+%% reps
+numReps = 30;
+numOfRepetitionsSync = 5;
+
+%% gestures
+parameters.numGestures = 12; % including sync and excluding relax
 
 parameters.gestures = {'waveIn', 'waveOut', 'fist', 'open', 'pinch',...
     'up', 'down', 'forward', 'backward', 'left', 'right', 'sync'};
@@ -52,33 +56,46 @@ parameters.numSamplesPerGesture.right = numReps;
 
 parameters.numSamplesPerGesture.sync = numOfRepetitionsSync;
 
-%% acquisition
-parameters.emgFreq = 500;
+%% devices
+global DeviceType % tells which device is used.
+if isempty(DeviceType)
+    DeviceType = 'gForce'; % default device
+end
+parameters.emgFreq.myo = 200;
+parameters.emgFreq.gForce = 500;
 parameters.quatFreq = 50;
-parameters.recordingTime = 5; % segs
-parameters.gestureDuration = 750;
 
-%% lim values
-parameters.maxTamEmg = 500*5*1.2; % not important, only used in the first 
-% graph, can have any value
+%% Segmentation
+parameters.gestureDuration = 1.5; % seconds for default segmentation size
 
-parameters.xi = 1000; % default x initial position for segmentation
-parameters.xo = 2000; % default x last position for segmentation
+%% chart
+parameters.border = 5; % num of points on the left and right
+parameters.lineWidth = 5; % sliders
+parameters.minSliderSeparation = 20; % distance between sliders
 
-parameters.yLims = [0 256]; % of raw emgs
+% initials
+parameters.xi = 200; % initial x initial position for segmentation
+parameters.xo = 400; % initial x last position for segmentation
 
-% changing only by freq... keeping the previous values, /200*500 es la
-% conversión entre frequencias
-parameters.lowerBoundSamples = round(75  /200*500);
-parameters.upperBoundSamples = round(600  /200*500);
-
-parameters.lowerBoundSamplesSync = round(4*500);
-parameters.upperBoundSamplesSync = round(8.5*500); % 4-8.5 segs
-
-
-parameters.limsEmgFiltered = [0 200];
+% lims values
+parameters.limsEmgFiltered = [0 2.75];
 
 parameters.limitsQuatFilteredValue = [0 2.5];
+
+parameters.maxTamEmg = 500*5*1.2; % not important, only used in the first
+% graph, can have any value
+
+parameters.yLims = [-1 1]; % of raw emgs
+
+
+%% Segmentation limits [seconds]
+% changing only by freq...
+parameters.lowerBound = 0.375; % [s]
+parameters.upperBound = 3;
+
+parameters.lowerBoundSync = 3; % [s]
+parameters.upperBoundSync = 8.5;
+
 
 %% colors
 parameters.leftLineColor = [71, 47, 146]/255;
