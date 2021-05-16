@@ -1,5 +1,5 @@
 # Manual Segmentation
-Graphical interface to carry on the manual segmentation of the Emg signals recorded. Compatible with Data Acquisition Software version 1.3.
+Graphical interface to carry on the manual segmentation of the Emg signals recorded. Compatible with the latest Data Acquisition version.
 
 ## Important Notes
 Remember, the Data Acquisition Software generates a unique folder for each user. Whereas the Manual Segmentation Software gathers together all the segmentations of all users in a *.mat* file.

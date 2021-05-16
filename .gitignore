@@ -6,6 +6,7 @@ data/*/
 
 # The index on each project
 matFiles/indicesTodos.mat
+matFiles/nameOfSegmentator.mat
 
 # -------- Matlab template
 .git/

@@ -36,7 +36,7 @@ else
             kRep = numRepsLastGesture;
         else
             % first user, first rep, first gesture
-            disp('Error al disminuir los indices!');
+            disp('Error trying to reduce index!');
         end
     end
 end

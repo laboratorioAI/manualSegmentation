@@ -248,9 +248,7 @@ str = {'CONTACT INFORMATION'
     'Subject: HGR - Manual Segmentation Software'
     ''
     'Email address:'
-    'marco.benalcazar@epn.edu.ec'
-    'lorena.barona@epn.edu.ec'
-    'angel.valdivieso@epn.edu.ec'
+    'laboratorio.ia@epn.edu.ec'
     ''
     'With the screenshot of the error.'
     'Thank you.'};
@@ -260,17 +258,8 @@ msgbox(str, 'CONTACT','help');
 
 % --------------------------------------------------------------------
 function printFinalMessage()
-str = {'Thank you, you finished the segmentation'
-    ''
-    'Please:'
-    '1. Compress the folder "matFiles"'
-    '2. Email the file to:'
-    'Subject: Segmented the segmentation'
-    'email addresses:'
-    'marco.benalcazar@epn.edu.ec'
-    'lorena.barona@epn.edu.ec'
-    'angel.valdivieso@epn.edu.ec'
-    ''
+str = {'Thank you, you finished the segmentation.'
+    'The segmentation information is stored in "matFiles/indicesTodos.mat".'
     };
 uiwait(msgbox(str,'MESSAGE','help'));
 
@@ -310,7 +299,7 @@ function syncGesture_Callback(hObject, eventdata, handles)
 % hObject    handle to syncGesture (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-playGif('waveOut');
+playGif('sync');
 
 % --------------------------------------------------------------------
 function relaxGesture_Callback(hObject, eventdata, handles)
