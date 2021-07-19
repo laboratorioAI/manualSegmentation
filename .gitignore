@@ -3,6 +3,7 @@
 temp/
 
 data/*/
+src/combineData/*
 
 # The index on each project
 matFiles/indicesTodos.mat
