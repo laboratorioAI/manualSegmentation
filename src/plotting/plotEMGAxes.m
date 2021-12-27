@@ -21,10 +21,11 @@ xlimit = muestrasAq;
 kXLength = xlimit; % global var del tam de la emg.
 
 %% textos
+global DeviceType
 handles.nombreText.String = [nameUser ' (' num2str(numUser) '|' num2str(totalUsers) ')'];
 handles.gestoText.String = [nameGesture ' (' num2str(numGesture) '|' num2str(totalGestures) ')'];
 handles.kRepText.String = kRep;
-
+handles.deviceText.String = DeviceType;
 
 
 %% Plot on miniaxes
@@ -32,14 +33,14 @@ for cidx = 1:8
     idxSTR = num2str(cidx);
     cmd = ['ax = handles.axes' idxSTR ';'];
     eval(cmd);
-    
+
     plot(ax, emgRep(:,cidx), 'LineWidth', 1); % no update
-    
+
     xlim(ax, [0 xlimit]);
     ylim(ax, parameters.yLims);
     ax.YTick = []; % YTick
     ax.XTick = []; % XTick
-    
+
 end
 
 

@@ -63,9 +63,9 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
-% axes(handles.axes1);
+movegui(hObject,'center'); % mostrando en el centr
 imshow(ones(150,250,3), 'Parent', handles.axes1);
-% axis off;
+
 drawnow;
 
 % --- Outputs from this function are returned to the command line.
@@ -77,7 +77,6 @@ function varargout = playGif_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-movegui(hObject,'center'); % mostrando en el centr
 play(hObject, eventdata, handles);
 drawnow
 % --- Executes on button press in replayPushbutton.
@@ -96,7 +95,7 @@ delete(gcf);
 
 function play(hObject, eventdata, handles)
 global filename;
-set(handles.gestureName, 'String', upper( filename )); 
+set(handles.gestureName, 'String', upper( filename ));
 axes(handles.axes1);
 % fullname = fullfile('gifs',[filename '.gif']);
 fullname = ['.\gifs\the11Gestures\' filename '.gif'];
@@ -105,6 +104,11 @@ gifDraw = imshow(gifImage(:,:,:,1));
 colormap(cmap)
 [rows, columns, numColorChannels, numImages] = size(gifImage);
 drawnow
+
+gifinfo = imfinfo(fullname);
+% the delayTime is in hundreds of second
+gifPeriod = mean([gifinfo.DelayTime])/100;
+
 % Despliega el gif en forma de video
 for k = 1 : numImages
     try
@@ -115,11 +119,14 @@ for k = 1 : numImages
         break;
     end
     gifDraw.CData = gifImage(:,:,:,k);
-    
-%     thisFrame = gifImage(:,:,:,k);
-%     thisRGB = uint8(255 * ind2rgb(thisFrame, cmap));
-%        thisRGB = image(ind2rgb(thisFrame, cmap));
-%     imshow(thisRGB);
-    drawnow;
+
+    %     thisFrame = gifImage(:,:,:,k);
+    %     thisRGB = uint8(255 * ind2rgb(thisFrame, cmap));
+    %        thisRGB = image(ind2rgb(thisFrame, cmap));
+    %     imshow(thisRGB);
+    a = tic;
+    while toc(a) < gifPeriod
+        drawnow;
+    end
 end
 

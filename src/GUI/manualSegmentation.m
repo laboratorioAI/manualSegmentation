@@ -1,6 +1,6 @@
 function varargout = manualSegmentation(varargin)
 %% MANUALSEGMENTATION MATLAB code for manualSegmentation.fig
-% Last Modified by GUIDE v2.5 18-Feb-2021 10:54:35
+% Last Modified by GUIDE v2.5 27-Dec-2021 11:54:39
 % Jonathan A. Zea
 % Begin initialization code - DO NOT EDIT
 
@@ -377,3 +377,11 @@ function backG_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 playGif('backward');
+
+
+% --------------------------------------------------------------------
+function pinchGesture_Callback(hObject, eventdata, handles)
+% hObject    handle to pinchGesture (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+playGif('pinch');
