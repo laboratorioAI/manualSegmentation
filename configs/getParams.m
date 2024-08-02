@@ -34,11 +34,17 @@ parameters.recordingTimeSync = 10; % segs
 numReps = 30;
 numOfRepetitionsSync = 5;
 
-%% gestures
-parameters.numGestures = 12; % including sync and excluding relax
+%% gestures 11
+% parameters.numGestures = 12; % including sync and excluding relax
+% 
+% parameters.gestures = {'waveIn', 'waveOut', 'fist', 'open', 'pinch',...
+%     'up', 'down', 'forward', 'backward', 'left', 'right', 'sync'};
 
-parameters.gestures = {'waveIn', 'waveOut', 'fist', 'open', 'pinch',...
-    'up', 'down', 'forward', 'backward', 'left', 'right', 'sync'};
+%% gestures 5
+parameters.numGestures = 5; % including sync and excluding relax
+
+parameters.gestures = {'waveIn', 'waveOut', 'fist', 'open', 'pinch'};
+
 % 'relax', % nosegmentation of relax reps
 % parameters.numSamplesPerGesture.relax = numOfRepetitionsRelax;
 
