@@ -31,8 +31,8 @@ parameters.recordingTime = 5; % segs
 parameters.recordingTimeSync = 10; % segs
 
 %% reps
-numReps = 30;
-numOfRepetitionsSync = 5;
+numReps = 50;
+numOfRepetitionsSync = 1;
 
 %% gestures 11
 % parameters.numGestures = 12; % including sync and excluding relax
