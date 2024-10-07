@@ -5,10 +5,11 @@ temp/
 data/*/
 src/combineData/*
 
+
 # The index on each project
 matFiles/indicesTodos.mat
 matFiles/nameOfSegmentator.mat
-
+matFiles/contadores.mat
 # -------- Matlab template
 .git/
 # project things
