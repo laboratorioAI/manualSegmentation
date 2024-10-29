@@ -32,5 +32,5 @@ folders = dir('data');
 
 numUsersToSegment = length(folders) - 3; % el current dir, el up dir, el readme
 
-seleccionarUsuario();
-
+%seleccionarUsuario();
+seleccionarUsuario_App();
