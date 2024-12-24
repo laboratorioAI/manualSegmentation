@@ -32,7 +32,7 @@ parameters.recordingTime = 5; % segs
 parameters.recordingTimeSync = 10; % segs
 
 %% reps
-numReps = 10;
+numReps = 50;
 numOfRepetitionsSync = 1;
 
 %% gestures 11
